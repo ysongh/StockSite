@@ -13,17 +13,6 @@ class Portfolio extends Component{
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-    
-    componentDidMount (){
-        console.log(this.props);
-        axios.get('https://api.iextrading.com/1.0/stock/aapl/company')
-            .then(response => {
-                this.setState({symbol: response.data});
-             })
-             .catch(error => {
-                 console.log(error);
-             });
-    }
      
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
@@ -65,7 +54,7 @@ class Portfolio extends Component{
                 </form>
                 <p>{this.state.symbol.symbol}</p>
                 <p>{this.state.symbol.companyName}</p>
-                <p>${this.state.price}</p>
+                <p>{this.state.price}</p>
             </div>
         );
     }
