@@ -1,0 +1,29 @@
+{
+  "name": "stocksite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ysongh/stocksite.git"
+  },
+  "author": "songh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ysongh/stocksite/issues"
+  },
+  "homepage": "https://github.com/ysongh/stocksite#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.18"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
