@@ -8,7 +8,9 @@ class Portfolio extends Component{
             stocks: [],
             symbol: '',
             price: '',
-            name: ''
+            name: '',
+            error: '',
+            show: false
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -24,25 +26,32 @@ class Portfolio extends Component{
         axios.get(`https://api.iextrading.com/1.0/stock/${this.state.name}/company`)
             .then(response => {
                 this.setState({symbol: response.data});
+                this.setState({error: ""});
+                this.setState({show: true});
+                
+                axios.get(`https://api.iextrading.com/1.0/stock/${this.state.name}/price`)
+                    .then(response => {
+                        this.setState({price: response.data});
+                     });
              })
              .catch(error => {
-                 console.log(error);
-             });
-             
-        axios.get(`https://api.iextrading.com/1.0/stock/${this.state.name}/price`)
-            .then(response => {
-                this.setState({price: response.data});
-             })
-             .catch(error => {
-                 console.log(error);
+                 this.setState({error: "Not found"});
+                 this.setState({show: false});
              });
     }
      
     render(){
+        let stockInfo;
+        
+        stockInfo = (
+            <div className="border border-primary mt-3">
+                <p>{this.state.symbol.symbol} - {this.state.symbol.companyName} - ${this.state.price}</p>
+            </div>
+        );
         
         return(
-            <div>
-                <h1>Portfolio</h1>
+            <div className="Portfolio">
+                <h1 className="text-center">Portfolio</h1>
                 <form onSubmit={this.onSubmit}>
                     <input
                       type="text"
@@ -52,9 +61,8 @@ class Portfolio extends Component{
                     />
                     <input type="submit" />
                 </form>
-                <p>{this.state.symbol.symbol}</p>
-                <p>{this.state.symbol.companyName}</p>
-                <p>{this.state.price}</p>
+                {this.state.show ? stockInfo : null}
+                <p>{this.state.error}</p>
             </div>
         );
     }
