@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const users = require('./routes/api/users');
+
 const app = express();
 
 const db = require('./config/keys').mongoURI;
@@ -12,6 +14,8 @@ const db = require('./config/keys').mongoURI;
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use('/api/users', users);
 
 const port = 8081;
 
