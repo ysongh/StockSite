@@ -6,6 +6,9 @@ class Home extends Component{
       return(
           <div className="text-center">
               <h1>Stock Site</h1>
+              <Link to="/login" className="btn btn-light">
+                  Login
+              </Link>
               <Link to="/register" className="btn btn-light">
                   Sign Up
               </Link>
