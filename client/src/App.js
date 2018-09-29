@@ -11,7 +11,7 @@ import store from './store';
 import Home from './component/home/Home';
 import Register from './component/auth/Register';
 import Login from './component/auth/Login';
-import Portfolio from './component/Portfolio';
+import Portfolio from './component/portfolio/Portfolio';
 
 if(localStorage.jwtToken){
   setAuthToken(localStorage.jwtToken);

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { withRouter   } from 'react-router-dom';
+
+import { logoutUser } from '../../actions/authActions';
 
 class Portfolio extends Component{
     constructor(){
@@ -39,8 +43,15 @@ class Portfolio extends Component{
                  this.setState({show: false});
              });
     }
+    
+    onLogoutClick(e){
+        e.preventDefault();
+        this.props.logoutUser();
+        this.props.history.push('/');
+    }
      
     render(){
+        const {isAuthenticated} = this.props.auth;
         let stockInfo;
         
         stockInfo = (
@@ -49,8 +60,15 @@ class Portfolio extends Component{
             </div>
         );
         
+        const authLinks = (
+            <a href="" onClick={this.onLogoutClick.bind(this)} className="nav-link">
+                Logout
+            </a>
+        );
+        
         return(
             <div className="Portfolio">
+                {isAuthenticated ? authLinks : null}
                 <h1 className="text-center">Portfolio</h1>
                 <form onSubmit={this.onSubmit}>
                     <input
@@ -68,4 +86,8 @@ class Portfolio extends Component{
     }
 }
 
-export default Portfolio;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default withRouter(connect(mapStateToProps, {logoutUser})(Portfolio));
