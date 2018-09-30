@@ -8,6 +8,8 @@ import { setCurrentUser } from './actions/authActions';
 
 import store from './store';
 
+import Navbar from './component/layout/Navbar';
+import Footer from './component/layout/Footer';
 import Home from './component/home/Home';
 import Register from './component/auth/Register';
 import Login from './component/auth/Login';
@@ -25,12 +27,14 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <Navbar />
             <div className="container">
               <Route exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/portfolio" component={Portfolio} />
             </div>
+            <Footer />
           </div>
         </Router>
       </Provider>
