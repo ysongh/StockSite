@@ -1,4 +1,4 @@
-import axios from '../axios-lists';
+import axios from '../axios-stocks';
 
 import { GET_MONEY } from './types';
 
