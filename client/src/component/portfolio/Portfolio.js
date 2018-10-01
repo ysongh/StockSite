@@ -57,6 +57,15 @@ class Portfolio extends Component{
                 this.setState({show: false});
             });
     }
+    
+    buyStock(symbol, company, price){
+        const stockData = {
+            symbol: symbol,
+            companyName: company,
+            price: price
+        };
+        console.log(stockData);
+    }
      
     render(){
         const {user} = this.props.auth;
@@ -65,6 +74,10 @@ class Portfolio extends Component{
         stockInfo = (
             <div className="border border-primary mt-3">
                 <p>{this.state.symbol.symbol} - {this.state.symbol.companyName} - ${this.state.price}</p>
+                <button
+                    onClick={() => this.buyStock(this.state.symbol.symbol, this.state.symbol.companyName, this.state.price)}>
+                    Buy
+                </button>
             </div>
         );
         
