@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import request from 'request-promise';
 import { connect } from 'react-redux';
 import { withRouter   } from 'react-router-dom';
 
@@ -27,21 +27,35 @@ class Portfolio extends Component{
     onSubmit(e){
         e.preventDefault();
         
-        axios.get(`https://api.iextrading.com/1.0/stock/${this.state.name}/company`)
-            .then(response => {
-                this.setState({symbol: response.data});
-                this.setState({error: ""});
+        var options = {
+            uri: `https://api.iextrading.com/1.0/stock/${this.state.name}/company`,
+            json: true
+        };
+        var options2 = {
+            uri: `https://api.iextrading.com/1.0/stock/${this.state.name}/price`,
+            json: true
+        };
+        
+        request(options)
+            .then((response) => {
                 this.setState({show: true});
-                
-                axios.get(`https://api.iextrading.com/1.0/stock/${this.state.name}/price`)
-                    .then(response => {
-                        this.setState({price: response.data});
-                     });
+                this.setState({error: ""});
+                this.setState({symbol: response});
+            })
+            .catch((err) => {
+                console.log(err);
+                this.setState({error: "Not found"});
+                this.setState({show: false});
+            });
+        request(options2)
+            .then(response => {
+                this.setState({price: response});
              })
-             .catch(error => {
-                 this.setState({error: "Not found"});
-                 this.setState({show: false});
-             });
+             .catch((err) => {
+                console.log(err);
+                this.setState({error: "Not found"});
+                this.setState({show: false});
+            });
     }
      
     render(){
