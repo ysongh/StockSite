@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const users = require('./routes/api/users');
+const stocks = require('./routes/api/stocks');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 app.use('/api/users', users);
+app.use('/api/stocks', stocks);
 
 const port = 8081;
 

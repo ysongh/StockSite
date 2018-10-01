@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from './utilis/setAuthToken';
+import PrivateRoute from './component/common/PrivateRoute';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import store from './store';
@@ -41,7 +42,9 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/portfolio" component={Portfolio} />
+              <Switch>
+                 <PrivateRoute exact path="/portfolio" component={Portfolio} />
+              </Switch>
             </div>
             <Footer />
           </div>
