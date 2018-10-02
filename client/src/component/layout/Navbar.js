@@ -43,6 +43,23 @@ class Navbar extends Component {
       </ul>
     );
     
+    const authLinks2 = (
+      <ul className="navbar-nav mr-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="/portfolio">
+            {' '}
+            Portfolio
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/transactions">
+            {' '}
+            Transaction
+          </Link>
+        </li>
+      </ul>
+    );
+    
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
@@ -59,14 +76,8 @@ class Navbar extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="mobile-nav">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                
-              </li>
-            </ul>
-
+            {isAuthenticated ? authLinks2 : null}
             {isAuthenticated ? authLinks : guestLinks}
-            
           </div>
         </div>
       </nav>
