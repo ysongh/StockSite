@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter   } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/authActions';
+import { addTransaction } from '../../actions/transactionActions';
 
 class Portfolio extends Component{
     constructor(){
@@ -49,7 +50,7 @@ class Portfolio extends Component{
             price: price,
             quantity: quantity
         };
-        console.log(stockData);
+        this.props.addTransaction(stockData, this.props.history);
     }
      
     render(){
@@ -101,4 +102,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default withRouter(connect(mapStateToProps, {logoutUser})(Portfolio));
+export default connect(mapStateToProps, {logoutUser, addTransaction})(withRouter(Portfolio));

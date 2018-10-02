@@ -6,6 +6,7 @@ const Transaction = require('../../models/Transaction');
 
 router.get('/all', (req, res) => {
      Transaction.find()
+         .sort({date: -1})
          .populate('user', ['name'])
          .then(transactions => {
              res.json(transactions);
