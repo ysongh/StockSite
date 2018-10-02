@@ -10,8 +10,6 @@ class Portfolio extends Component{
         super();
         this.state = {
             stocks: [],
-            symbol: '',
-            price: '',
             name: '',
             error: '',
             show: false
@@ -28,11 +26,7 @@ class Portfolio extends Component{
         e.preventDefault();
         
         var options = {
-            uri: `https://api.iextrading.com/1.0/stock/${this.state.name}/company`,
-            json: true
-        };
-        var options2 = {
-            uri: `https://api.iextrading.com/1.0/stock/${this.state.name}/price`,
+            uri: `https://api.iextrading.com/1.0/tops?symbols=`+this.state.name,
             json: true
         };
         
@@ -40,29 +34,20 @@ class Portfolio extends Component{
             .then((response) => {
                 this.setState({show: true});
                 this.setState({error: ""});
-                this.setState({symbol: response});
+                this.setState({stocks: response});
             })
             .catch((err) => {
                 console.log(err);
                 this.setState({error: "Not found"});
                 this.setState({show: false});
             });
-        request(options2)
-            .then(response => {
-                this.setState({price: response});
-             })
-             .catch((err) => {
-                console.log(err);
-                this.setState({error: "Not found"});
-                this.setState({show: false});
-            });
     }
     
-    buyStock(symbol, company, price){
+    buyStock(symbol, price, quantity){
         const stockData = {
             symbol: symbol,
-            companyName: company,
-            price: price
+            price: price,
+            quantity: quantity
         };
         console.log(stockData);
     }
@@ -73,11 +58,22 @@ class Portfolio extends Component{
         
         stockInfo = (
             <div className="border border-primary mt-3">
-                <p>{this.state.symbol.symbol} - {this.state.symbol.companyName} - ${this.state.price}</p>
-                <button
-                    onClick={() => this.buyStock(this.state.symbol.symbol, this.state.symbol.companyName, this.state.price)}>
-                    Buy
-                </button>
+                {
+                    this.state.stocks.map((stock, index) => {
+                      return (
+                        <div key={index}>
+                            <p>Symbol: {stock.symbol}</p>
+                            <p>Price: ${stock.lastSalePrice}</p>
+                            <p>Volume: {stock.volume}</p>
+                            <button
+                                onClick={() => this.buyStock(stock.symbol, stock.lastSalePrice, 1)}>
+                                Buy
+                            </button>
+                        </div>
+                      );
+                    })
+                }
+                
             </div>
         );
         
