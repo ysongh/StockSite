@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+let serverURL = 'https://stocksite-ysongh.c9users.io:8081';
+
+if(process.env.NODE_ENV === 'production'){
+    serverURL = 'https://songstocksite.herokuapp.com/';
+}
+
 const instance = axios.create({
-   baseURL: 'https://stocksite-ysongh.c9users.io:8081' 
+   baseURL: serverURL
 });
 
 export default instance;

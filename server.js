@@ -41,6 +41,9 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
- const port = process.env.PORT || 8081;
+let port = 8081;
+if(process.env.NODE_ENV === 'production'){
+    port = process.env.PORT;
+}
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
