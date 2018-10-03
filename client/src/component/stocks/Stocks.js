@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import StocksList from './StocksList';
 import { getStocks } from '../../actions/stockActions';
 
 class Stocks extends Component{
@@ -15,16 +16,14 @@ class Stocks extends Component{
         if(stocks === null || loading){
             stockContent = <p>loading</p>;
         }
+        else{
+            stockContent = <StocksList stocks={stocks} />;
+        }
         
         return(
             <div>
                 <h1>Your Stocks</h1>
-                <div className="row">
-                    <div className="col">
-                        
-                    </div>
-                    {stockContent}
-                </div>
+                {stockContent}
             </div>
         );
     }
