@@ -3,7 +3,7 @@ import request from 'request-promise';
 import { connect } from 'react-redux';
 import { withRouter   } from 'react-router-dom';
 
-import { logoutUser, getUser } from '../../actions/authActions';
+import { logoutUser, getUser, loseMoney } from '../../actions/authActions';
 import { addTransaction } from '../../actions/transactionActions';
 
 class Portfolio extends Component{
@@ -49,11 +49,17 @@ class Portfolio extends Component{
     }
     
     buyStock(symbol, price, quantity){
+        const moneyData = {
+            money: price
+        };
+        
         const stockData = {
             symbol: symbol,
             price: price,
             quantity: quantity
         };
+        
+        this.props.loseMoney(moneyData, this.props.auth.user.id);
         this.props.addTransaction(stockData, this.props.history);
     }
      
@@ -106,4 +112,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {logoutUser, getUser, addTransaction})(withRouter(Portfolio));
+export default connect(mapStateToProps, {logoutUser, getUser, loseMoney, addTransaction})(withRouter(Portfolio));
