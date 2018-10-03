@@ -20,27 +20,10 @@ router.post('/', passport.authenticate('jwt', {session: false}),(req, res) => {
     const stockFields = {};
     stockFields.user = req.user.id;
     stockFields.symbol = req.body.symbol;
+    stockFields.price = req.body.price;
     stockFields.quantity = req.body.quantity;
     
-    Stock.findOne({user: req.user.id}).then(stock => {
-        if(stock){
-            Stock.findOne({symbol: stockFields.symbol}).then(stock => {
-                if(stock){
-                    Stock.findOneAndUpdate(
-                        {user: req.user.id},
-                        {$set: stockFields},
-                        {new: true}
-                    ).then(stock => res.json(stock));
-                }
-                else{
-                    new Stock(stockFields).save().then(stock => res.json(stock));
-                }
-            });
-        }
-        else{
-            new Stock(stockFields).save().then(stock => res.json(stock));
-        }
-    });
+    new Stock(stockFields).save().then(stock => res.json(stock));
 });
 
 module.exports = router;
