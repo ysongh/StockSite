@@ -2,8 +2,8 @@ import axios from '../axios-stocks';
 
 import { GET_STOCKS, STOCK_LOADING } from './types';
 
-export const getTransactions = () => dispatch => {
-    dispatch(setTransactionLoading());
+export const getStocks = () => dispatch => {
+    dispatch(setStockLoading());
     axios.get('/api/stocks/all')
         .then(res =>
             dispatch({
@@ -19,7 +19,7 @@ export const getTransactions = () => dispatch => {
         );
 };
 
-export const setTransactionLoading = () => {
+export const setStockLoading = () => {
     return{
         type: STOCK_LOADING
     };

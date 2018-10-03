@@ -57,6 +57,12 @@ class Navbar extends Component {
             Transaction
           </Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/stocks">
+            {' '}
+            Stock
+          </Link>
+        </li>
       </ul>
     );
     
