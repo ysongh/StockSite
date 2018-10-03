@@ -84,4 +84,18 @@ router.post('/login', (req, res) => {
         });
 });
 
+router.post('/buy/:id', passport.authenticate('jwt', {session: false}),(req, res) => {
+    const userFields = {};
+    User.findById(req.params.id)
+        .then(user => {
+            userFields.money = parseFloat(user.money) - parseFloat(req.body.money);
+            User.findOneAndUpdate(
+                {_id: req.user.id},
+                {$set: userFields},
+                {new: true}
+            ).then(user => res.json(user));
+        })
+        .catch(err => res.status(404).json({error: err}));
+});
+
 module.exports = router;
