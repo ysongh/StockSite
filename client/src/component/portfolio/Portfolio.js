@@ -3,7 +3,7 @@ import request from 'request-promise';
 import { connect } from 'react-redux';
 import { withRouter   } from 'react-router-dom';
 
-import { logoutUser } from '../../actions/authActions';
+import { logoutUser, getUser } from '../../actions/authActions';
 import { addTransaction } from '../../actions/transactionActions';
 
 class Portfolio extends Component{
@@ -17,6 +17,10 @@ class Portfolio extends Component{
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+    
+    componentDidMount(){
+        this.props.getUser(this.props.auth.user.id);
     }
      
     onChange(e){
@@ -54,7 +58,7 @@ class Portfolio extends Component{
     }
      
     render(){
-        const {user} = this.props.auth;
+        const {userMoney} = this.props.auth;
         let stockInfo;
         
         stockInfo = (
@@ -81,7 +85,7 @@ class Portfolio extends Component{
         return(
             <div className="Portfolio">
                 <h1 className="text-center">Portfolio</h1>
-                <p className="text-center">You have ${user.money}</p>
+                <p className="text-center">You have ${userMoney.money}</p>
                 <form onSubmit={this.onSubmit}>
                     <input
                       type="text"
@@ -102,4 +106,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {logoutUser, addTransaction})(withRouter(Portfolio));
+export default connect(mapStateToProps, {logoutUser, getUser, addTransaction})(withRouter(Portfolio));
