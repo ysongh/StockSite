@@ -7,7 +7,7 @@ import { getStocks } from '../../actions/stockActions';
 
 class Stocks extends Component{
     componentDidMount(){
-         this.props.getStocks();
+         this.props.getStocks(this.props.auth.user.id);
     }
     
     render(){

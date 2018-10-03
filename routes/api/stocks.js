@@ -4,8 +4,8 @@ const passport = require('passport');
 
 const Stock = require('../../models/Stock');
 
-router.get('/all', (req, res) => {
-     Stock.find()
+router.get('/all/:id', (req, res) => {
+     Stock.find({user: req.params.id})
          .sort({symbol: 1})
          .populate('user', ['name'])
          .then(stocks => {
