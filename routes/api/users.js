@@ -84,6 +84,13 @@ router.post('/login', (req, res) => {
         });
 });
 
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
+    User.findById(req.params.id)
+        .then(user => res.json(user))
+        .catch(err =>
+            res.status(404).json({error: err}));
+});
+
 router.post('/buy/:id', passport.authenticate('jwt', {session: false}),(req, res) => {
     const userFields = {};
     User.findById(req.params.id)
