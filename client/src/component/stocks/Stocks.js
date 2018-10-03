@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import StocksList from './StocksList';
+import Spinner from '../common/Spinner';
 import { getStocks } from '../../actions/stockActions';
 
 class Stocks extends Component{
@@ -14,7 +15,7 @@ class Stocks extends Component{
         let stockContent;
         
         if(stocks === null || loading){
-            stockContent = <p>loading</p>;
+            stockContent = <Spinner />;
         }
         else{
             stockContent = <StocksList stocks={stocks} />;
