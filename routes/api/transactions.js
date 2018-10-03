@@ -4,8 +4,8 @@ const passport = require('passport');
  
 const Transaction = require('../../models/Transaction');
 
-router.get('/all', (req, res) => {
-     Transaction.find()
+router.get('/all/:id', (req, res) => {
+    Transaction.find({user: req.params.id})
          .sort({date: -1})
          .populate('user', ['name'])
          .then(transactions => {

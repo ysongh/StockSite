@@ -2,9 +2,9 @@ import axios from '../axios-stocks';
 
 import { GET_TRANSACTIONS, TRANSACTION_LOADING, GET_ERRORS } from './types';
 
-export const getTransactions = () => dispatch => {
+export const getTransactions = (id) => dispatch => {
     dispatch(setTransactionLoading());
-    axios.get('/api/transactions/all')
+    axios.get(`/api/transactions/all/${id}`)
         .then(res =>
             dispatch({
                 type: GET_TRANSACTIONS,

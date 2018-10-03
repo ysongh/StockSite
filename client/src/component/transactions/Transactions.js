@@ -7,7 +7,7 @@ import { getTransactions } from '../../actions/transactionActions';
 
 class Transactions extends Component{
     componentDidMount(){
-         this.props.getTransactions();
+         this.props.getTransactions(this.props.auth.user.id);
     }
     
     render(){
