@@ -23,6 +23,7 @@ export const addTransaction = (transactionData, history) => dispatch => {
     axios
         .post('/api/transactions', transactionData)
         .then(res => history.push('/transactions'))
+        .then(dispatch(addStock(transactionData)))
         .catch(err => 
             dispatch({
                 type: GET_ERRORS,
@@ -35,4 +36,15 @@ export const setTransactionLoading = () => {
     return{
         type: TRANSACTION_LOADING
     };
+};
+
+export const addStock = (transactionData) => dispatch => {
+    axios
+        .post('/api/stocks', transactionData)
+        .catch(err => 
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };

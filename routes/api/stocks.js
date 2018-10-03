@@ -6,7 +6,7 @@ const Stock = require('../../models/Stock');
 
 router.get('/all', (req, res) => {
      Stock.find()
-         .sort({date: -1})
+         .sort({symbol: 1})
          .populate('user', ['name'])
          .then(stocks => {
              res.json(stocks);
