@@ -13,6 +13,7 @@ class Portfolio extends Component{
             stocks: [],
             name: '',
             error: '',
+            quantity: 1,
             show: false
         };
         this.onChange = this.onChange.bind(this);
@@ -76,8 +77,14 @@ class Portfolio extends Component{
                             <p>Symbol: {stock.symbol}</p>
                             <p>Price: ${stock.lastSalePrice}</p>
                             <p>Volume: {stock.volume}</p>
+                            <input
+                              type="Number"
+                              placeholder="1"
+                              name="quantity"
+                              onChange={this.onChange}
+                            />
                             <button
-                                onClick={() => this.buyStock(stock.symbol, stock.lastSalePrice, 1)}>
+                                onClick={() => this.buyStock(stock.symbol, stock.lastSalePrice, this.state.quantity)}>
                                 Buy
                             </button>
                         </div>
