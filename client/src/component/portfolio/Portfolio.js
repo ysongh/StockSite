@@ -50,13 +50,14 @@ class Portfolio extends Component{
     }
     
     buyStock(symbol, price, quantity){
+        let totalPrice = price * quantity;
         const moneyData = {
-            money: price
+            money: totalPrice
         };
         
         const stockData = {
             symbol: symbol,
-            price: price,
+            price: totalPrice,
             quantity: quantity
         };
         
@@ -79,7 +80,7 @@ class Portfolio extends Component{
                             <p>Volume: {stock.volume}</p>
                             <input
                               type="Number"
-                              placeholder="1"
+                              value={this.state.quantity}
                               name="quantity"
                               onChange={this.onChange}
                             />
