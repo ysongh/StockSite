@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
 class TransactionsItem extends Component{
@@ -18,7 +19,7 @@ class TransactionsItem extends Component{
                         <p className="d-inline">{transaction.quantity}</p>
                     </div>
                     <div className="col-md-3">
-                        <p className="d-inline">{transaction.date}</p>
+                        <p className="d-inline"><Moment format="MM/DD/YYYY">{transaction.date}</Moment></p>
                     </div>
                 </div>
             </div>
