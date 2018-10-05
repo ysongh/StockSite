@@ -38,14 +38,19 @@ class Portfolio extends Component{
         
         request(options)
             .then((response) => {
-                this.setState({show: true});
-                this.setState({error: ""});
-                this.setState({stocks: response});
+                console.log(response);
+                if(response.length > 0){
+                    this.setState({show: true});
+                    this.setState({error: ""});
+                    this.setState({stocks: response});
+                }
+                else{
+                    this.setState({error: "Not found"});
+                    this.setState({show: false});
+                }
             })
             .catch((err) => {
                 console.log(err);
-                this.setState({error: "Not found"});
-                this.setState({show: false});
             });
     }
     
