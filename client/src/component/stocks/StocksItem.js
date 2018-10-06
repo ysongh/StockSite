@@ -15,7 +15,7 @@ class StocksItem extends Component{
                         <p className="d-inline">Stocks - {stock.quantity}</p>
                     </div>
                     <div className="col-md-4">
-                        <p className="d-inline">Price - ${stock.price}</p>
+                        <p className="d-inline">Price - ${stock.price.toFixed(2)}</p>
                     </div>
                 </div>
             </div>

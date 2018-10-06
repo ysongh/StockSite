@@ -81,7 +81,7 @@ class Portfolio extends Component{
                       return (
                         <div key={index}>
                             <p>Symbol: {stock.symbol}</p>
-                            <p>Price: ${stock.lastSalePrice}</p>
+                            <p>Price: ${stock.lastSalePrice.toFixed(2)}</p>
                             <p>Volume: {stock.volume}</p>
                             <input
                               type="Number"
@@ -104,7 +104,7 @@ class Portfolio extends Component{
         return(
             <div className="Portfolio">
                 <h1 className="text-center">Portfolio</h1>
-                <p className="text-center">You have ${userMoney.money}</p>
+                <p className="text-center">You have ${userMoney.money.toFixed(2)}</p>
                 <form onSubmit={this.onSubmit}>
                     <input
                       type="text"

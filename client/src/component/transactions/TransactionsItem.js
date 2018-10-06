@@ -13,7 +13,7 @@ class TransactionsItem extends Component{
                         <h5 className="d-inline">{transaction.symbol}</h5>
                     </div>
                     <div className="col-md-3">
-                        <p className="d-inline">${transaction.price}</p>
+                        <p className="d-inline">${transaction.price.toFixed(2)}</p>
                     </div>
                     <div className="col-md-3">
                         <p className="d-inline">{transaction.quantity}</p>
