@@ -1,21 +1,47 @@
 import React, { Component } from 'react';
+import request from 'request-promise';
 import { connect } from 'react-redux';
 
 class StocksItem extends Component{
+    constructor(){
+        super();
+        this.state = {
+            price: 0
+        };
+    }
+    
+    componentDidMount(){
+        const options = {
+            uri: `https://api.iextrading.com/1.0/stock/${this.props.stock.symbol}/price`,
+            json: true
+        };
+        
+        request(options)
+            .then((response) => {
+                this.setState({price: response});
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+    
     render(){
         const {stock} = this.props;
         
         return(
             <div className="card card bg-light text-dark mb-1 p-2">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-2">
                         <h5 className="d-inline">{stock.symbol}</h5>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <p className="d-inline">Stocks - {stock.quantity}</p>
                     </div>
-                    <div className="col-md-4">
-                        <p className="d-inline">Price - ${stock.price.toFixed(2)}</p>
+                    <div className="col-md-3">
+                        <p className="d-inline">PPS - ${(stock.price/stock.quantity).toFixed(2)}</p>
+                    </div>
+                    <div className="col-md-3">
+                        <p className="d-inline">MP - ${this.state.price}</p>
                     </div>
                 </div>
             </div>
