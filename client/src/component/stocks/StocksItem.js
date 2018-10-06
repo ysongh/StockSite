@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'request-promise';
+import classnames from 'classnames';
 import { connect } from 'react-redux';
 
 class StocksItem extends Component{
@@ -29,7 +30,9 @@ class StocksItem extends Component{
         const {stock} = this.props;
         
         return(
-            <div className="card card bg-light text-dark mb-1 p-2">
+            <div className={classnames("card card text-dark mb-1 p-2",
+                {'bg-success': (stock.price/stock.quantity) > this.state.price,'bg-danger': (stock.price/stock.quantity) < this.state.price}
+            )}>
                 <div className="row">
                     <div className="col-md-2">
                         <h5 className="d-inline">{stock.symbol}</h5>
