@@ -29,22 +29,29 @@ class StocksItem extends Component{
     render(){
         const {stock} = this.props;
         
+        const pps = stock.price/stock.quantity;
+        
+        const changePrecent = ((pps/this.state.price) * 100);
+        
         return(
             <div className={classnames("card card text-dark mb-1 p-2",
-                {'bg-success': (stock.price/stock.quantity) > this.state.price,'bg-danger': (stock.price/stock.quantity) < this.state.price}
+                {'bg-success': (pps) > this.state.price,'bg-danger': (pps) < this.state.price}
             )}>
                 <div className="row">
                     <div className="col-md-2">
                         <h5 className="d-inline">{stock.symbol}</h5>
                     </div>
-                    <div className="col-md-3">
+                    <div className="col-md-2">
                         <p className="d-inline">Stocks - {stock.quantity}</p>
                     </div>
                     <div className="col-md-3">
-                        <p className="d-inline">PPS - ${(stock.price/stock.quantity).toFixed(2)}</p>
+                        <p className="d-inline">PPS - ${pps.toFixed(2)}</p>
                     </div>
                     <div className="col-md-3">
                         <p className="d-inline">MP - ${this.state.price}</p>
+                    </div>
+                    <div className="col-md-2">
+                        <p className="d-inline">{changePrecent.toFixed(2)}%</p>
                     </div>
                 </div>
             </div>
