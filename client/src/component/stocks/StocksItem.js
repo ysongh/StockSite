@@ -51,7 +51,11 @@ class StocksItem extends Component{
                         <p className="d-inline">MP - ${this.state.price}</p>
                     </div>
                     <div className="col-md-2">
-                        <p className="d-inline">{changePrecent.toFixed(2)}%</p>
+                        <p className="d-inline">
+                            {changePrecent > 100 ? <i class="fas fa-level-up-alt"></i> : null}
+                            {changePrecent < 100 ? <i class="fas fa-level-down-alt"></i> : null}
+                            {changePrecent.toFixed(2)}%
+                        </p>
                     </div>
                 </div>
             </div>
